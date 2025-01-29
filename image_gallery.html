@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Image Gallery</title>
+    <link rel="stylesheet" href="image_gallery.css">
+</head>
+
+<body>
+    <h1 class="title">IMAGE GALLERY</h1>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search images..." onkeyup="filterImages()">
+    </div>
+
+    <div class="gallery-container" id="galleryContainer"></div>
+
+    <div class="modal" id="imageModal">
+        <span class="close">&times;</span>
+        <img id="modalImage" src="" alt="">
+    </div>
+    <script>
+        const images = [{
+                src: './galleryimage/883f0d002b7748a2a4f1385694a18253.jpg',
+                caption: 'Nature'
+            }, {
+                src: './galleryimage/bike.jpg',
+                caption: 'Bike'
+            }, {
+                src: './galleryimage/car.jpg',
+                caption: 'Car'
+            }, {
+                src: './galleryimage/42862900ea743ed17cf2c35cb370ef28.jpg',
+                caption: 'Cityscape'
+            }, {
+                src: './galleryimage/cd3df7237f5960eeef6eeef316261643.jpg',
+                caption: 'Beach'
+            }, {
+                src: './galleryimage/setup.jpg',
+                caption: 'setup'
+            },
+
+            {
+                src: './galleryimage/batman.jpg',
+                caption: 'Batman'
+            }, {
+                src: './galleryimage/revnue.jpg',
+                caption: 'Revnue'
+            },
+
+            // Add more images here
+            // { src: 'image_path.jpg', caption: 'Caption' },
+        ];
+
+        const galleryContainer = document.getElementById('galleryContainer');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.querySelector('.modal .close');
+        const searchInput = document.getElementById('searchInput');
+
+        // Function to create gallery items
+        function createGallery() {
+            images.forEach(image => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+<img src="${image.src}" alt="${image.caption}">
+<div class="caption">${image.caption}</div>
+`;
+                item.querySelector('img').addEventListener('click', () => {
+                    modalImage.src = image.src;
+                    modal.style.display = 'flex';
+                });
+                galleryContainer.appendChild(item);
+            });
+        }
+
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Filter images
+        function filterImages() {
+            const filter = searchInput.value.toLowerCase();
+            const items = document.querySelectorAll('.gallery-item');
+
+            items.forEach(item => {
+                const caption = item.querySelector('.caption').textContent.toLowerCase();
+                item.style.display = caption.includes(filter) ? '' : 'none';
+            });
+        }
+
+        // Initialize gallery
+        createGallery();
+    </script>
+</body>
+
+</html>
