@@ -1,77 +1,41 @@
-let lastResult = '';
+   const display = document.getElementById('display');
 
-function appendToDisplay(value) {
-    const display = document.getElementById('display');
-    display.value += value;
-}
+   function appendValue(value) {
+       display.value += value;
+   }
 
-function clearDisplay() {
-    const display = document.getElementById('display');
-    display.value = '';
-    lastResult = '';
-    updatePreviousResult();
-}
+   function clearDisplay() {
+       display.value = '';
+   }
 
-function calculateResult() {
-    const display = document.getElementById('display');
-    try {
-        lastResult = eval(display.value);
-        display.value = lastResult;
-        updatePreviousResult();
-    } catch (error) {
-        display.value = 'Error';
-    }
-}
+   function calculateResult() {
+       try {
+           display.value = eval(display.value);
+       } catch {
+           display.value = 'Error';
+       }
+   }
 
-function calculateSin() {
-    const display = document.getElementById('display');
-    const value = parseFloat(display.value);
-    if (!isNaN(value)) {
-        lastResult = Math.sin(value);
-        display.value = lastResult;
-        updatePreviousResult();
-    } else {
-        display.value = 'Error';
-    }
-}
-
-function calculateCos() {
-    const display = document.getElementById('display');
-    const value = parseFloat(display.value);
-    if (!isNaN(value)) {
-        lastResult = Math.cos(value);
-        display.value = lastResult;
-        updatePreviousResult();
-    } else {
-        display.value = 'Error';
-    }
-}
-
-function calculateTan() {
-    const display = document.getElementById('display');
-    const value = parseFloat(display.value);
-    if (!isNaN(value)) {
-        lastResult = Math.tan(value);
-        display.value = lastResult;
-        updatePreviousResult();
-    } else {
-        display.value = 'Error';
-    }
-}
-
-function calculateSqrt() {
-    const display = document.getElementById('display');
-    const value = parseFloat(display.value);
-    if (!isNaN(value) && value >= 0) {
-        lastResult = Math.sqrt(value);
-        display.value = lastResult;
-        updatePreviousResult();
-    } else {
-        display.value = 'Error';
-    }
-}
-
-function updatePreviousResult() {
-    const previousResultDisplay = document.getElementById('previous-result');
-    previousResultDisplay.textContent = lastResult ? `Last Result: ${lastResult}` : '';
-}
+   function calculateTrig(func) {
+       try {
+           const value = parseFloat(display.value);
+           let result;
+           switch (func) {
+               case 'sin':
+                   result = Math.sin(value).toFixed(4);
+                   break;
+               case 'cos':
+                   result = Math.cos(value).toFixed(4);
+                   break;
+               case 'tan':
+                   result = Math.tan(value).toFixed(4);
+                   break;
+               case 'cot':
+                   result = (1 / Math.tan(value)).toFixed(4);
+                   break;
+           }
+           display.value = result;
+       } catch {
+           display.value = 'Error';
+       }
+   }
