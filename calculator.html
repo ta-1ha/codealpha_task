@@ -5,98 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        
-        .calculator {
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        
-        .display {
-            /* max-width: 100%; */
-            height: 60px;
-            width: 21rem;
-            margin-bottom: 20px;
-            padding: 10px;
-            font-size: 1.5rem;
-            text-align: right;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #f9fafb;
-        }
-        
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-        
-        button {
-            height: 60px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        
-        button.operation {
-            background-color: #cbd5e1;
-        }
-        
-        button.operation:hover {
-            background-color: #94a3b8;
-        }
-        
-        button.trig {
-            background-color: #bfdbfe;
-        }
-        
-        button.trig:hover {
-            background-color: #93c5fd;
-        }
-        
-        button.clear {
-            grid-column: span 4;
-            background-color: #f87171;
-            color: white;
-        }
-        
-        button.clear:hover {
-            background-color: #ef4444;
-        }
-        
-        button.equal {
-            background-color: #4ade80;
-        }
-        
-        button.equal:hover {
-            background-color: #22c55e;
-        }
-        
-        @media (max-width: 480px) {
-            .display {
-                font-size: 1.2rem;
-            }
-            button {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="calculator.css">
+
 </head>
 
 <body>
@@ -135,48 +45,8 @@
         </div>
     </div>
 
-    <script>
-        const display = document.getElementById('display');
 
-        function appendValue(value) {
-            display.value += value;
-        }
-
-        function clearDisplay() {
-            display.value = '';
-        }
-
-        function calculateResult() {
-            try {
-                display.value = eval(display.value);
-            } catch {
-                display.value = 'Error';
-            }
-        }
-
-        function calculateTrig(func) {
-            try {
-                const value = parseFloat(display.value);
-                let result;
-                switch (func) {
-                    case 'sin':
-                        result = Math.sin(value).toFixed(4);
-                        break;
-                    case 'cos':
-                        result = Math.cos(value).toFixed(4);
-                        break;
-                    case 'tan':
-                        result = Math.tan(value).toFixed(4);
-                        break;
-                    case 'cot':
-                        result = (1 / Math.tan(value)).toFixed(4);
-                        break;
-                }
-                display.value = result;
-            } catch {
-                display.value = 'Error';
-            }
-        }
+    <script src="calculator.js">
     </script>
 </body>
 
